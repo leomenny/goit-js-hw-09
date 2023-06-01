@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const form = document.querySelector('.form');
 const delayInput = document.querySelector('input[name="delay"]');
@@ -12,6 +13,11 @@ function handleSubmit(event) {
   const delay = Number(delayInput.value);
   const step = Number(stepInput.value);
   const amount = Number(amountInput.value);
+
+  if (step < 0 || delay < 0 || amount <= 0) {
+    Notify.failure('Invalid values');
+    return;
+  }
   
   createPromises(delay, step, amount);
 }
